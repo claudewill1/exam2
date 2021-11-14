@@ -31,10 +31,32 @@
                 <th class="w-25">Actions</th>
             </thead>
             <tbody>
-               
+                {% for car in all_cars %}
+                {% if session["user_id"] == car.user_id %}    
+                <tr>
+                        <td class="w-25">{{car.model}}</td>
+                        <td class="w-25">{{car.year}}</td>
+                        <td class="w-25">{{car.user.first_name}} {{car.user.last_name}}</td>
+                        <td class="w-25">
+                            
+                            <a href="/edit/{{car.id}}" class="btn btn-primary">Edit</a>
+                            <a href="/delete/{{car.id}}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                {% elif session["user_id"] != car.user_id %}
+                <tr>
+                    <td class="w-25">{{car.model}}</td>
+                    <td class="w-25">{{car.year}}</td>
+                    <td class="w-25">{{car.user.first_name}} {{car.user.last_name}}</td>
+                    <td class="w-25">
+                        <a href="/show/{{car.id}}" class="btn btn-success">View</a>
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
             </tbody>
         </table>
-        <a style="width: 20%; margin-left: 55%;" href="/add/{{user.id}}/car" class="btn btn-primary justify-self-end">Add A Car</a>
+        <a style="width: 20%; margin-left: 55%;" href="/add/{{user.id}}" class="btn btn-primary justify-self-end">Add A Car</a>
     </main>
 </body>
 </html>
