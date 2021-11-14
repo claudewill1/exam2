@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Dashboard</title>
+</head>
+<body>
+    <header class="d-flex flex-column justify-content-between">
+        <div id="pageTop" class="d-flex flex-row justify-content-between">
+            
+            <h1>Welcome to Car Dealz, {{user.last_name}}!!!</h1>
+        </div>
+        
+        
+        <div class="nav">
+            <nav style="margin-left: 90%;" class="col-1 d-flex flex-column justify-content-end">
+                <a href="/logout" class="btn btn-warning m-2">Logout</a>
+            </nav>
+        </div>
+    </header>
+    <main class="d-flex flex-column w-75 m-5">
+        <h2>Cars for Sale</h2>
+        <table class="table table-dark tabled-striped w-75">
+            <thead class="border-bottom">
+                <th class="w-25">Model</th>
+                <th class="w-25">Year</th>
+                <th class="w-25">Seller</th>
+                <th class="w-25">Actions</th>
+            </thead>
+            <tbody>
+               
+            </tbody>
+        </table>
+        <a style="width: 20%; margin-left: 55%;" href="/add/{{user.id}}/car" class="btn btn-primary justify-self-end">Add A Car</a>
+    </main>
+</body>
+</html>
