@@ -82,13 +82,17 @@ class Car:
         print(r)
         
         data = {
-            "id": r[0]['user.id'], "first_name": r[0]['first_name'], "last_name": r[0]['last_name'], 'email': r[0]['email'],  'password': r[0]['password'], 'created_at': r[0]['created_at'], 'updated_at': r[0]['updated_at']
+            "id": r[0]['user_id'], "first_name": r[0]['first_name'], "last_name": r[0]['last_name'], 'email': r[0]['email'],  'password': r[0]['password'], 'created_at': r[0]['created_at'], 'updated_at': r[0]['updated_at']
         }
         print(data)
         car = cls(r[0])
         car.user = user.User.getSingleUser(data)
         return car
 
+    @classmethod
+    def purchaseCar(cls,data):
+        q = "INSERT INTO purchases (user_id, car_id) VALUES (%(user_id)s,%(car_id)s);"
+        return connectToMySQL(cls.db).query_db(q,data)
 
     @classmethod
     def updateSingleCar(cls,info):

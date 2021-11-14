@@ -57,11 +57,15 @@ def show(car_id):
     if 'user_id' not in session:
         return redirect('/')
     data = {
-        'id': id
+        'id': car_id
     }
     
-    return render_template("show.html",car = Car.getOneWithUser(data), user = User.getSingleUser(data))
+    return render_template("show.html",car = Car.getOneWithUser(data), user = User.getAllUsers())
 
+@app.route("/purchase/<int:car_id>")
+def purchase(car_id):
+    Car.deleteCar(car_id)
+    return redirect("/dashboard")
 
 @app.route("/car/<int:id>/update",methods=["POST"])
 def updateSighting(id):

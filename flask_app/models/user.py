@@ -53,6 +53,17 @@ class User:
         return cls(results[0])
 
 
+    @classmethod
+    def getAllUsers(cls):
+        query = "SELECT * FROM users;"
+        results = connectToMySQL(cls.db).query_db(query)
+        users = []
+        if not results:
+            return False
+        else:
+            for user in results:
+                users.append(cls(user))
+        return users
 
     @staticmethod
     def validateLogin(user):

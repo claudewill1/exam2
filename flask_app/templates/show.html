@@ -32,7 +32,7 @@
             <p style="font-size: 16pt; font-family:monospace;">{{car.description}}</p>
             <div class="d-flex flex-row justify-content-between">
                 <p>Seller: {{car.user.first_name}} {{car.user.last_name}}</p>
-                <form action="/purchase">
+                <form action="/purchase/{{car.id}}">
                     <input type="submit" value="Purchase" class="btn btn-primary">
                 </form>
             </div>
