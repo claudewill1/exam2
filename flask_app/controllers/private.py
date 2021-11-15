@@ -1,3 +1,5 @@
+from flask_app.models.ownerlist import OwnerList
+from flask_app.models.owner import Owner
 from flask_app import app
 from flask import Flask, render_template, redirect, request, session
 import re
@@ -64,8 +66,31 @@ def show(car_id):
 
 @app.route("/purchase/<int:car_id>")
 def purchase(car_id):
+    data = {
+        "owner_id": session["user_id"],
+        "car_id": car_id,
+
+    }
+    OwnerList.addPurchase(data)
     Car.deleteCar(car_id)
     return redirect("/dashboard")
+
+
+
+@app.route('/purchase', methods=['POST'])
+def purchases():
+    user_id = session["user_id"]
+    car_id = Car.getOneCarById(user_id)
+    purchase_data = {  
+        "user_id": session['user_id'],
+        "car_id": car_id
+    }
+    Car.purchaseCar(purchase_data)
+    return redirect(f'/purchases/{session["user_id"]}/show')
+
+@app.route("/getpurchase")
+def showPurchases():
+    return render_template("purchases.html")
 
 @app.route("/car/<int:id>/update",methods=["POST"])
 def updateSighting(id):

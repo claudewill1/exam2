@@ -94,6 +94,14 @@ class Car:
         q = "INSERT INTO purchases (user_id, car_id) VALUES (%(user_id)s,%(car_id)s);"
         return connectToMySQL(cls.db).query_db(q,data)
 
+    
+    @classmethod
+    def getListOfPurchases(cls,data):
+        query = "SELECT * FROM owner AS o LEFT JOIN purchases AS p ON owner_id = o.id LEFT JOIN cars AS c ON c.id = car_id LEFT JOIN user AS u ON u.id = o.user_id WHERE o.id = %(id)s"
+        results = connectToMySQL(cls.db).query_db(query,data)
+        print(results)
+        return results
+
     @classmethod
     def updateSingleCar(cls,info):
         query = "UPDATE cars SET model = %(model)s, make = %(make)s, description = %(description)s, price = %(price)s, year = %(year)s WHERE id = %(id)s;"
